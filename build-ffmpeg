@@ -321,7 +321,7 @@ fi
 
 
 build "ffmpeg"
-download "http://ffmpeg.org/releases/ffmpeg-3.4.1.tar.bz2" "ffmpeg-snapshot.tar.bz2"
+download "http://ffmpeg.org/releases/ffmpeg-3.4.2.tar.bz2" "ffmpeg-snapshot.tar.bz2"
 cd $PACKAGES/ffmpeg* || exit
 CFLAGS="-I$WORKSPACE/include" LDFLAGS="-L$WORKSPACE/lib" 
 execute ./configure  --arch=64 --prefix=${WORKSPACE} --extra-cflags="-I$WORKSPACE/include" --extra-ldflags="-L$WORKSPACE/lib" \
@@ -333,42 +333,16 @@ execute ./configure  --arch=64 --prefix=${WORKSPACE} --extra-cflags="-I$WORKSPAC
 	--disable-ffplay \
 	--disable-ffserver \
 	--disable-doc \
-	--enable-gpl \
-	--enable-version3 \
-	--enable-nonfree \
 	--enable-pthreads \
 	--enable-libvpx \
 	--enable-libmp3lame \
 	--enable-libtheora \
 	--enable-libvorbis \
-	--enable-libx264 \
-	--enable-libx265 \
 	--enable-runtime-cpudetect \
 	--enable-libfdk-aac \
 	--enable-avfilter \
-	--enable-libopencore_amrwb \
-	--enable-libopencore_amrnb \
-	--enable-filters \
-	--enable-libvidstab 
-	# enable all filters
-	# enable AAC de/encoding via libfdk-aac [no]
-	# enable detecting cpu capabilities at runtime (smaller binary)
-	# enable HEVC encoding via x265 [no]
-	# enable H.264 encoding via x264 [no]
-	# enable Vorbis en/decoding via libvorbis, native implementation exists [no]
-	# enable Theora encoding via libtheora [no]
-	# enable MP3 encoding via libmp3lame [no]
-	# enable VP8 and VP9 de/encoding via libvpx [no]
-	# enable pthreads [autodetect]
-	# allow use of nonfree code, the resulting libs and binaries will be unredistributable [no]
-	# upgrade (L)GPL to version 3 [no]
-	# allow use of GPL code, the resulting libs and binaries will be under GPL [no]
-	# do not build documentation
-	# disable ffserver build
-	# disable ffplay build
-	# build static libraries [no]
-	# disable debugging symbols
-	# disable build shared libraries [no]
+	--enable-avresample \
+	--enable-filters
 execute make -j $MJOBS
 execute make install
 
